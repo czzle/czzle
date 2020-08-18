@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="lib/v0.0.1/czzle.js"></script>
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            background-color: #ffffff;
+            padding: 10px;
+        }
+       /*  h1 {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            text-align: center;
+            margin: 80px auto  20px auto;
+        }
+        .czzle {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+        }
+        .czzle img {
+            cursor: pointer;
+            outline: none;
+            position: absolute;
+            transition: transform 0.8s, border 0s 0.8s;
+            transform-style: preserve-3d;
+            -webkit-user-drag: none;
+        }
+        .czzle img.front {
+            z-index: 300;
+        }
+        .czzle img.back {
+            z-index: 200;
+        }
+        .czzle img.selected {
+            border: 5px solid rgb(23, 100, 163);
+            margin: -5px 0 0 -5px;
+            z-index: 1000;
+            transition: transform 0.8s, border 0s 0.8s, margin 0s 0.8s;
+
+        }
+        .czzle img.reversed {
+            z-index: 100;
+        }
+        .czzle .card-0x0.front:not(.reverse), .czzle .card-0x0.back.reverse{
+            opacity: 1;
+            position: absolute;
+            transform: translate(0, 0);
+            visibility: visible;
+        }
+        .czzle .card-0x1.front:not(.reverse), .czzle .card-0x1.back.reverse{
+            opacity: 1;
+            position: absolute;
+            transform: translate(0, 100px);
+            visibility: visible;
+        }
+        .czzle .card-0x2.front:not(.reverse), .czzle .card-0x2.back.reverse{
+            opacity: 1;
+            position: absolute;
+            transform: translate(0, 200px);
+            visibility: visible;
+        }
+
+        .czzle .card-1x0.front:not(.reverse), .czzle .card-1x0.back.reverse{
+            opacity: 1;
+            position: absolute;
+            transform: translate(100px, 0);
+            visibility: visible;
+        }
+        .czzle .card-1x1.front:not(.reverse), .czzle .card-1x1.back.reverse{
+            opacity: 1;
+            position: absolute;
+            transform: translate(100px, 100px);
+            visibility: visible;
+        }
+        .czzle .card-1x2.front:not(.reverse), .czzle .card-1x2.back.reverse{
+            opacity: 1;
+            position: absolute;
+            transform: translate(100px, 200px);
+            visibility: visible;
+        }
+
+        .czzle .card-2x0.front:not(.reverse), .czzle .card-2x0.back.reverse{
+            opacity: 1;
+            position: absolute;
+            transform: translate(200px, 0);
+            visibility: visible;
+        }
+        .czzle .card-2x1.front:not(.reverse), .czzle .card-2x1.back.reverse{
+            opacity: 1;
+            position: absolute;
+            transform: translate(200px, 100px);
+            visibility: visible;
+        }
+        .czzle .card-2x2.front:not(.reverse), .czzle .card-2x2.back.reverse{
+            opacity: 1;
+            position: absolute;
+            transform: translate(200px, 200px);
+            visibility: visible;
+        }
+        .czzle .card-0x0.back:not(.reverse), .czzle .card-0x0.front.reverse{
+            transform: translate(0, 0) rotateY(180deg);
+        }
+        .czzle .card-0x1.back:not(.reverse), .czzle .card-0x1.front.reverse{
+            transform: translate(0, 100px) rotateY(180deg);
+        }
+        .czzle .card-0x2.back:not(.reverse), .czzle .card-0x2.front.reverse{
+            transform: translate(0, 200px) rotateY(180deg);
+        }
+        .czzle .card-1x0.back:not(.reverse), .czzle .card-1x0.front.reverse{
+            transform: translate(100px, 0) rotateY(180deg);
+        }
+        .czzle .card-1x1.back:not(.reverse), .czzle .card-1x1.front.reverse{
+            transform: translate(100px, 100px) rotateY(180deg);
+        }
+        .czzle .card-1x2.back:not(.reverse), .czzle .card-1x2.front.reverse{
+            transform: translate(100px, 200px) rotateY(180deg);
+        }
+        .czzle .card-2x0.back:not(.reverse), .czzle .card-2x0.front.reverse{
+            transform: translate(200px, 0) rotateY(180deg);
+        }
+        .czzle .card-2x1.back:not(.reverse), .czzle .card-2x1.front.reverse{
+            transform: translate(200px, 100px) rotateY(180deg);
+        }
+        .czzle .card-2x2.back:not(.reverse), .czzle .card-2x2.front.reverse{
+            transform: translate(200px, 200px) rotateY(180deg);
+        } */
+        
+    </style>
+</head>
+<body>
+    <input type="hidden" name="token1" czzle>
+    <input type="hidden" name="token2" czzle>
+    <input type="hidden" name="token3" czzle>
+    <input type="hidden" name="token4" czzle>
+    <script>
+        czzle.configure({
+            apiUrl: 'http://localhost:8080',
+        });
+        // let undo = [];
+        // fetch('http://localhost:8080/v1/begin', {
+        //     method: 'POST',
+        //     body: JSON.stringify({}),
+        //     headers: {
+        //         'Content-Type': 'application/json; charset=UTF-8',
+        //     }
+        // }).then(function (response) {
+        //     if (response.ok) {
+        //         return response.json();
+        //     }
+        //     return Promise.reject(response);
+        // }).then(function (response) {
+        //     const cards = [];
+        //     for (const tile of response.puzzle.tile_map.tiles) {
+        //         cards.push(`<img src="data:image/png;base64,${tile.data}" alt="tile" class="card-${tile.pos.x}x${tile.pos.y} ${tile.type}">`)
+        //     }
+        //     const czzle = document.querySelector(".czzle");
+        //     czzle.innerHTML = cards.join('\n');
+        //     czzle.querySelectorAll("img").forEach((img) => {
+        //         let reverse = false;
+        //         let name = '';
+        //         let face = '';
+        //         img.classList.forEach((c) => {
+        //             if (c == 'reverse') {
+        //                 reverse = true;
+        //                 return;
+        //             }
+        //             if (c.indexOf('card-') == 0) {
+        //                 name = c;
+        //                 return;
+        //             }
+        //             if (c == 'front' || c == 'back') {
+        //                 face = c;
+        //             }
+        //         });
+        //         let opositeClass = `.czzle > img.${name}.${face == 'front' ? 'back' : 'front'}`;
+        //         const oposite = document.querySelector(opositeClass);
+        //         img.addEventListener('click', () => {
+        //             if (img.classList.contains('selected')) {
+        //                 if (undo.length > 0) {
+        //                     undo.forEach((el) => {
+        //                         el.classList.toggle('reverse');
+        //                         el.classList.remove('selected');
+        //                     });
+        //                     undo = [];
+        //                 }
+        //                 return;
+        //             }
+        //             oposite.classList.toggle('reverse');
+        //             img.classList.toggle('reverse');
+        //             if (undo.length > 0) {
+        //                 undo.forEach((el) => {
+        //                     el.classList.toggle('reverse');
+        //                     el.classList.remove('selected');
+        //                 });
+        //             }
+        //             oposite.classList.add('selected');
+        //             undo = [img, oposite];
+        //         });
+        //     });
+            
+        // }).catch(function (error) {
+        //     console.warn('Something went wrong.', error);
+        // });
+
+    </script>
+</body>
+</html>

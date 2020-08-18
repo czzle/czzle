@@ -1,0 +1,124 @@
+syntax = "proto3";
+
+package czzle;
+option go_package = "github.com/czzle/czzle";
+
+
+import "google/protobuf/any.proto";
+
+service CzzleService {
+    rpc Begin(BeginReq) returns (BeginRes);
+    rpc Solve(SolveReq) returns (SolveRes);
+    rpc Validate(ValidateReq) returns (ValidateRes);
+}
+
+// Types
+
+enum Level {
+    UnknownLevel = 0;
+    None = 1;
+    Easy = 2;
+    Medium = 3;
+    Hard = 4;
+}
+
+enum TileType {
+    UnknownTile = 1;
+    FrontTile = 2;
+    BackTile = 3;
+}
+
+enum ActionType {
+    UnknownAction = 0;
+    BeginAction = 1;
+    FlipAction = 2;
+    ConfirmAction = 3;
+}
+
+// Models
+
+message ClientInfo {
+    string ID = 1;
+    string IP = 2;
+    int64 Time = 3;
+    string UserAgent = 4;
+}
+
+message Puzzle {
+    string Token = 1;
+    Level Level = 2;
+    ClientInfo Client = 3;
+    int64 ExpiresAt = 4;
+    int64 IssuedAt = 5;
+    TileMap TileMap = 6;
+}
+
+
+message Solution {
+    string Token = 1;
+    repeated Action Actions = 2;
+}
+
+message Action {
+    ActionType Type = 1;
+    int64 Time = 2;
+    google.protobuf.Any Data = 3;
+}
+
+message FlipActionData {
+    Pos Pos = 1;
+}
+
+
+message Pos {
+    int64 X = 1;
+    int64 Y = 2;
+}
+
+
+message TileMap {
+    int64 Size = 1;
+    repeated Tile Tiles = 2;
+}
+
+message Tile {
+    TileType Type = 1;
+    Pos Pos = 2;
+    bytes Data = 3;
+}
+
+
+message Results {
+    bool OK = 1;
+    int64 Took = 2;
+    oneof Properties {
+        Puzzle Next = 3; 
+        string AccessToken = 4;
+    }
+}
+
+// DTO
+
+message BeginReq {
+    ClientInfo Client = 1;
+}
+
+message BeginRes {
+    Puzzle Puzzle = 1;
+}
+
+message SolveReq {
+    Solution Solution = 1;
+}
+
+message SolveRes {
+    Results Results = 1;
+}
+
+message ValidateReq {
+    string AccessToken = 1;
+}
+
+message ValidateRes {
+    bool OK = 1;
+}
